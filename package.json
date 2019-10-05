@@ -1,0 +1,24 @@
+{
+  "name": "images-watermarking",
+  "version": "1.0.0",
+  "description": "Tool for batch watermarking on images",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hynra/images-watermarking.git"
+  },
+  "keywords": [
+    "\"watermark\"",
+    "\"image",
+    "manipulate\""
+  ],
+  "author": "Hendra Permana <hynra@github.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hynra/images-watermarking/issues"
+  },
+  "homepage": "https://github.com/hynra/images-watermarking#readme"
+}
