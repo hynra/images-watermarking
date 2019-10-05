@@ -45,11 +45,11 @@ createDir = (path) => {
     }
 };
 
-addWatermark = async ({sourceImage, watermarkImage, targetFile}) => {
+addWatermark = async ({sourceImage, watermarkImage, targetFile, gravity}) => {
     try {
         await sharp(sourceImage)
             .withoutEnlargement(true)
-            .overlayWith(watermarkImage, {gravity: sharp.gravity.centre})
+            .overlayWith(watermarkImage, {gravity: gravity})
             .toFile(targetFile);
         return true;
     } catch (e) {
@@ -57,7 +57,7 @@ addWatermark = async ({sourceImage, watermarkImage, targetFile}) => {
     }
 };
 
-module.exports = async (rootDir, overlay) =>{
+module.exports = async ({rootDir, overlay, gravity}) =>{
     try {
         const dirs = await getDirectoriesRecursive(rootDir);
         let objs = [];
@@ -80,7 +80,8 @@ module.exports = async (rootDir, overlay) =>{
                     {
                         sourceImage: file,
                         watermarkImage: overlay,
-                        targetFile: dirName+"/"+getBaseName(file)
+                        targetFile: dirName+"/"+getBaseName(file),
+                        gravity: gravity
                     }
                 );
             })

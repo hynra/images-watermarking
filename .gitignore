@@ -166,7 +166,7 @@ typings/
 # nuxt.js build output
 .nuxt
 
-# react / gatsby 
+# react / gatsby
 public/
 
 # vuepress build output
@@ -182,3 +182,5 @@ public/
 .dynamodb/
 
 # End of https://www.gitignore.io/api/node,jetbrains+all
+
+example/images-watermark/
