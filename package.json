@@ -20,5 +20,10 @@
   "bugs": {
     "url": "https://github.com/hynra/images-watermarking/issues"
   },
-  "homepage": "https://github.com/hynra/images-watermarking#readme"
+  "homepage": "https://github.com/hynra/images-watermarking#readme",
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "path": "^0.12.7",
+    "sharp": "^0.18.4"
+  }
 }
