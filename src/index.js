@@ -33,7 +33,19 @@ getDirectoriesRecursive = (srcpath) => {
     return [srcpath, ...flatten(getDirectories(srcpath).map(getDirectoriesRecursive))];
 };
 
-module.exports = async (rootDir) =>{
+getBaseName = (srcpath, cursor) => {
+    if (cursor)
+        return path.basename(path.resolve(srcpath, cursor));
+    return path.basename(path.resolve(srcpath));
+};
+
+createDir = (path) => {
+    if (!fs.existsSync(path)) {
+        fs.mkdirSync(path);
+    }
+};
+
+module.exports = async (rootDir, overlay) =>{
     try {
         const dirs = await getDirectoriesRecursive(rootDir);
         let objs = [];
@@ -44,6 +56,15 @@ module.exports = async (rootDir) =>{
                 dir, files
             })
         }
+
+        const parentDir = path.resolve(rootDir, '..');
+        const resultDirName = parentDir + "/" + getBaseName(rootDir) + "-watermark";
+        createDir(resultDirName);
+        for (obj of objs) {
+            const dirName = resultDirName + "/" + getBaseName(obj.dir);
+            createDir(dirName);
+        }
+
         return objs;
     }catch (e) {
         throw e;
