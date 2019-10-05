@@ -2,8 +2,8 @@ const wm = require('../src');
 
 (async () => {
   try {
-      let dirs = await wm(__dirname +'/images', __dirname +'/overlay.png');
-      console.log(dirs);
+      let result = await wm(__dirname +'/images', __dirname +'/overlay.png');
+      console.log(result);
   }  catch (e) {
       console.log(e);
   }

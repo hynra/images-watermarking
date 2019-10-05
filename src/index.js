@@ -45,6 +45,18 @@ createDir = (path) => {
     }
 };
 
+addWatermark = async ({sourceImage, watermarkImage, targetFile}) => {
+    try {
+        await sharp(sourceImage)
+            .withoutEnlargement(true)
+            .overlayWith(watermarkImage, {gravity: sharp.gravity.centre})
+            .toFile(targetFile);
+        return true;
+    } catch (e) {
+        throw e;
+    }
+};
+
 module.exports = async (rootDir, overlay) =>{
     try {
         const dirs = await getDirectoriesRecursive(rootDir);
@@ -63,9 +75,20 @@ module.exports = async (rootDir, overlay) =>{
         for (obj of objs) {
             const dirName = resultDirName + "/" + getBaseName(obj.dir);
             createDir(dirName);
+            obj.files.map(async file => {
+                await addWatermark(
+                    {
+                        sourceImage: file,
+                        watermarkImage: overlay,
+                        targetFile: dirName+"/"+getBaseName(file)
+                    }
+                );
+            })
         }
 
-        return objs;
+        return {
+            message: "watermarking success"
+        };
     }catch (e) {
         throw e;
     }
