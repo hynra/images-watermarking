@@ -14,18 +14,16 @@ getDirectories =  (srcpath) => {
         .filter(path => fs.statSync(path).isDirectory());
 };
 
-getFiles = (dir) => {
+getFiles = async (dir) => {
     return _fs.readdirAsync(dir).filter(function (file) {
         file = path.resolve(dir, file);
         return _fs.statAsync(file).then(function (stat) {
             if (stat.isDirectory()) {
-                //return getFiles(file);
             } else {
                 return file;
             }
         })
     }).then(function (results) {
-        // flatten the array of arrays
         return Array.prototype.concat.apply([], results);
     });
 };
@@ -38,15 +36,15 @@ getDirectoriesRecursive = (srcpath) => {
 module.exports = async (rootDir) =>{
     try {
         const dirs = await getDirectoriesRecursive(rootDir);
-        let files = [];
+        let objs = [];
         for(dir of dirs){
-            const _files = await getFiles(dir);
-            files = [...files, ..._files];
+            let files = await getFiles(dir);
+            files = files.map(_f => path.resolve(dir, _f));
+            objs.push({
+                dir, files
+            })
         }
-        return {
-            dirs,
-            files
-        };
+        return objs;
     }catch (e) {
         throw e;
     }
