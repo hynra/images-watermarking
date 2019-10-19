@@ -9,7 +9,7 @@ Tool for batch watermarking on images
   * Parameters:
     * `rootDir`: full path of image folder
     * `overlay`: full path of watermark image
-    * `gravity`: overlay/watermark position. Available gravity: `north`, `northeast`, `east`, `southeast`, `south`, `southwest`, `west`, `northwest`, `center`
+    * `gravity`: overlay/watermark position. Available gravities: `north`, `northeast`, `east`, `southeast`, `south`, `southwest`, `west`, `northwest`, `center`
 
 ### Todo:
 
