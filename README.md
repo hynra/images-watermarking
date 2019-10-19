@@ -15,3 +15,4 @@ Tool for batch watermarking on images
 
 * [ ] Publish as `cli` tool with `yaml` manifest
 * [ ] Add text-based watermark
+* [ ] Work as Github Action
